@@ -1,7 +1,18 @@
 package org.melara.project.demo.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.springframework.lang.NonNull;
+
 public class Person {
+
+  @NonNull
+  @Size(max=6, min=2)
   private String name;
+
+  @NonNull
+  @Min(18)
   private int age;
 
   public Person() {
