@@ -2,7 +2,10 @@ package org.melara.project.demo.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.melara.project.demo.component.ExampleComponent;
 import org.melara.project.demo.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,14 +22,15 @@ public class Example3Controller {
 
   public static final String RESULT_VIEW = "result";
   public static final String EXAMPLE_VIEW = "view_form";
+
+  @Autowired
+  @Qualifier("exampleComponent")
+  private ExampleComponent exampleComponent;
   
   @GetMapping("/showForm")
   public ModelAndView showForm()
   {
-    // int result = 5 / 0;
-    LOGGER.info("INFO TRACE");
-    LOGGER.warn("WARNING TRACE");
-    LOGGER.error("ERROR TRACE");
+    exampleComponent.sayHello();
     ModelAndView mav = new ModelAndView(EXAMPLE_VIEW);
     mav.addObject("person", new Person());
     return mav;
@@ -44,5 +48,5 @@ public class Example3Controller {
   @GetMapping(value="")
   public RedirectView redirect() {
     return new RedirectView("/example3/showForm");
-  }  
+  }
 }
