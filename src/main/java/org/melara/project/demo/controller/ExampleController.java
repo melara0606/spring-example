@@ -1,6 +1,11 @@
 package org.melara.project.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.melara.project.demo.model.Person;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,8 +17,9 @@ public class ExampleController {
 
   // Primera forma de enviar una vista
   @GetMapping("/exampleString")
-  public String helloWorldString()
+  public String helloWorldString(Model model)
   {
+    model.addAttribute("persons", getListPeople() );
     return EXAMPLE_VIEW;
   }
 
@@ -21,6 +27,20 @@ public class ExampleController {
   @GetMapping("/exampleMAV")
   public ModelAndView helloWorldMAV()
   {
-    return new ModelAndView(EXAMPLE_VIEW);
+    ModelAndView mav = new ModelAndView(EXAMPLE_VIEW);
+    mav.addObject("persons", getListPeople() );
+    return mav;
+  }
+
+  private List<Person> getListPeople()
+  {
+    List<Person> list = new ArrayList<>();
+    list.add(new Person("Edwin", 26));
+    list.add(new Person("Juan", 15));
+    list.add(new Person("Antonio", 23));
+    list.add(new Person("Eva", 35));
+    list.add(new Person("Rodolfo", 12));
+
+    return list;
   }
 }
