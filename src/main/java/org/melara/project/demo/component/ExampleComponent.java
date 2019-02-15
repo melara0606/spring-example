@@ -1,10 +1,8 @@
 package org.melara.project.demo.component;
 
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.melara.project.demo.entidad.Course;
 import org.melara.project.demo.repository.CourseJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
