@@ -10,9 +10,6 @@
 
     <!-- Custom styles for this template -->
     <link href="#" th:href="@{/css/style.css}" rel="stylesheet" />
-    
- 	<link href="#" th:href="@{/css/contacts.css}" rel="stylesheet" />
- 	
   </head>
 
   <body>
@@ -31,53 +28,48 @@
 						<th>Telephone</th>
 						<th>City</th>
 						<th>Actions</th>
-						
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>656765678</td>
-						<td>Berlin</td>
+					<tr th:each="contact : ${list}" > 
+						<td><span th:text="${contact.fistName}"></span></td>
+						<td><span th:text="${contact.lastName}"></span></td>
+						<td><span th:text="${contact.telephone}"></span></td>
+						<td><span th:text="${contact.city}"></span></td>
 						<td>
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-						
-							<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+							<a href="#" th:href="@{/contact/addcontact?id=__${contact.id}__}">
+								<button type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								</button>
+							</a>
+							<a href="#" th:href="@{/contact/remove?id=__${contact.id}__}">
+								<button type="button" class="btn btn-danger">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</a>
 						</td>
-					</tr>
-					<tr>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>234324567</td>
-						<td>Madrid</td>
-						<td>
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-						
-							<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-						</td>
-					</tr>
-					<tr>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>324565678</td>
-						<td>Amsterdam</td>
-						<td>
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-						
-							<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-						</td>
+						<tr th:if="${#lists.isEmpty(list)}">
+							<td colspan="5"><h2 class="text-center">No hay datos por el momento</h2></td>
+						</tr>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		
-		<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Add contact</button>
+		<div class="alert alert-success" th:if="${ result == 1 }">Addedd successify!</div>
+		<span th:text="${result}"></span>
+
+		<a href="#" th:href="@{/contact/addcontact?id=0}">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-user" aria-hidden="true"></span> Add contact
+			</button>
+		</a>
 		
-		<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</button>
-	
+		<a href="#" th:href="@{/login?logout}">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout
+			</button>
+		</a>
 	</div>
-
-
 </body>
 </html>

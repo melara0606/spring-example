@@ -15,21 +15,24 @@
   </head>
 
   <body>
-
     <div class="container">
-
-      <form class="form-signin">
+      <form class="form-signin" action="#" th:action="@{/login}" method="POST" th:object="${userCredectial}">
         <h2 class="form-signin-heading">Sign in</h2>
         <label for="inputEmail" class="sr-only">Username</label>
-        <input type="text" id="inputUsername" class="form-control" placeholder="Username"/>
+        <input type="text" id="inputUsername" class="form-control" th:field="*{name}" placeholder="Username"/>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password"/>
+        <input type="password" id="inputPassword" class="form-control" th:field="*{password}" placeholder="Password"/>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
         	<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Sign in
         </button>
+        
+        <div class="alert alert-danger" role="alert" th:if="${error != null}" style="margin-top:15px">
+          Invalid username or password
+        </div>
+        <div class="alert alert-info" role="alert" th:if="${logout != null}" style="margin-top:15px">
+          Logout successfully
+        </div>
       </form>
-
-    </div> <!-- /container -->
-
+    </div>
 </body>
 </html>
