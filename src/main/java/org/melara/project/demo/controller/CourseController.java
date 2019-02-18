@@ -3,6 +3,7 @@ package org.melara.project.demo.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.melara.project.demo.entidad.Course;
+import org.melara.project.demo.repository.QueryDSLExampleRepo;
 import org.melara.project.demo.service.impl.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,9 +25,14 @@ public class CourseController {
   @Qualifier("courseServiceImpl")
   private CourseServiceImpl courseService;
 
+  @Autowired
+  @Qualifier("queryDSLExampleRepo")
+  private QueryDSLExampleRepo queryDSLExample;
+
   @GetMapping("/list")
   public ModelAndView listAllCourse()
   {
+    queryDSLExample.findAll();
     ModelAndView mav = new ModelAndView(COURSE_VIEW);
     LOG.info("Call: listAllCourse");
     mav.addObject("courses", courseService.listAllCourse());
