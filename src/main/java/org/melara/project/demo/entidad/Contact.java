@@ -3,9 +3,7 @@ package org.melara.project.demo.entidad;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +12,7 @@ public class Contact {
 
   @Id
   @Column(name = "id")
-  @GeneratedValue(strategy=GenerationType.AUTO, generator="native")
+  @GeneratedValue
   // @GeneratedValue(generator="question_generator")
   // @SequenceGenerator(
   //   name="question_generator",

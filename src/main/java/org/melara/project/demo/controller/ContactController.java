@@ -1,12 +1,13 @@
 package org.melara.project.demo.controller;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.melara.project.demo.contact.ViewContact;
 import org.melara.project.demo.model.ContactModel;
 import org.melara.project.demo.service.impl.ContactServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/contact")
 public class ContactController {
-  private static final Log LOG = LogFactory.getLog(ContactController.class);
 
   @Autowired
   @Qualifier("contactService")
@@ -28,6 +28,8 @@ public class ContactController {
   @GetMapping("/list")
   public String show(Model model)
   {
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    model.addAttribute("username", user.getUsername());
     model.addAttribute("list", contactService.listContactModel());
     return ViewContact.CONTACTS;
   }
@@ -38,6 +40,7 @@ public class ContactController {
     return "redirect:list";
   }
   
+  @PreAuthorize("hasRole('ROLE_USER')")
   @GetMapping("/addcontact")
   public String contactToForm(Model model, @RequestParam(name="id", required=false) int id)
   {

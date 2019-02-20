@@ -19,7 +19,7 @@
 		<div class="container">
 			<h1>Contact Form</h1>
 			<br/>
-			<form action="#" th:action="@{/contact/addcontact}" method="POST" th:object="${contactModel}">
+			<form action="#" th:action="@{/contact/addcontact}" method="POST" th:object="${contactModel}" autocomplete="off">
 				<input type="hidden" th:field="*{id}" />
 				First Name: <input type="text" class="form-control" th:field="*{fistName}" th:value="${fistName}"></input>
 				<br/>

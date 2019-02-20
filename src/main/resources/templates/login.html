@@ -16,12 +16,13 @@
 
   <body>
     <div class="container">
-      <form class="form-signin" action="#" th:action="@{/login}" method="POST" th:object="${userCredectial}">
-        <h2 class="form-signin-heading">Sign in</h2>
+      <form class="form-signin" th:action="@{/logincheck}" method="POST">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <h2 class="form-signin-heading">Sign in !!!</h2>
         <label for="inputEmail" class="sr-only">Username</label>
-        <input type="text" id="inputUsername" class="form-control" th:field="*{name}" placeholder="Username"/>
+        <input type="text" class="form-control" placeholder="Username" name="username" id="username" />
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" th:field="*{password}" placeholder="Password"/>
+        <input type="password" class="form-control" placeholder="Password" name="password" id="password" />
         <button class="btn btn-lg btn-primary btn-block" type="submit">
         	<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Sign in
         </button>
